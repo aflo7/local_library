@@ -13,6 +13,6 @@ block content
     else 
       li Are you sure you want to delete?
 
-      form(action=`http://localhost:3000/catalog/author/delete/${author.id}` method="post")
+      form(action=`https://limitless-brushlands-88497.herokuapp.com/catalog/author/delete/${author.id}` method="post")
         input.deleteButton(type='submit' value='DELETE')
         input.returnHome(type='button' onclick="location.href='http://localhost:3000/'" value='Go home')
