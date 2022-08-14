@@ -6,14 +6,15 @@ var logger = require("morgan")
 require("dotenv").config()
 var indexRouter = require("./routes/index")
 var catalogRouter = require("./routes/catalog")
-const compression = require('compression');
+const compression = require("compression")
 var app = express()
 
 //Import the mongoose module
 var mongoose = require("mongoose")
 
+const devDb = `mongodb+srv://andres-owner:${process.env.ENCODED}@cluster0.bg92a.mongodb.net/local_library?retryWrites=true&w=majority`
 //Set up default mongoose connection
-var mongoDB = `mongodb+srv://andres-owner:${process.env.ENCODED}@cluster0.bg92a.mongodb.net/local_library?retryWrites=true&w=majority`
+const mongoDB = process.env.MONGODB_URI || dev_db_url
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 // mongodb+srv://andres-owner:November20@2@cluster0.bg92a.mongodb.net/local_library?retryWrites=true&w=majority
 //Get the default connection
@@ -25,7 +26,7 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"))
 // view engine setup
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "pug")
-app.use(compression()); //Compress all routes, make requests faster
+app.use(compression()) //Compress all routes, make requests faster
 app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
